@@ -14,7 +14,7 @@ import json
 
 
 class CarMake(models.Model):
-    name = models.CharField(null=False, max_length=100, default='Make')
+    name = models.CharField(null=True, max_length=100, default='Make')
     description = models.CharField(max_length=500)
 
     def __str__(self):
@@ -31,7 +31,7 @@ class CarMake(models.Model):
 
 class CarModel(models.Model):
     id = models.IntegerField(default=1,primary_key=True)
-    name = models.CharField(null=False, max_length=100, default='Car')
+    name = models.CharField(null=True, max_length=100, default='Car')
    
     SEDAN = 'Sedan'
     SUV = 'SUV'
@@ -45,7 +45,7 @@ class CarModel(models.Model):
     ]
 
     type = models.CharField(
-        null=False,
+        null=True,
         max_length=50,
         choices=CAR_TYPES,
         default=SEDAN

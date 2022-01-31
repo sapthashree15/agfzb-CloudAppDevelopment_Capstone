@@ -67,7 +67,7 @@ def add_review(request, id):
             username = request.user.username
             print(request.POST)
             payload = dict()
-            car_id = request.POST["cars"]
+            car_id = request.POST["car"]
             car = CarModel.objects.get(pk=car_id)
             payload["time"] = datetime.utcnow().isoformat()
             payload["name"] = username

@@ -10,7 +10,6 @@ from datetime import datetime
 import logging
 import json
 
-
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 

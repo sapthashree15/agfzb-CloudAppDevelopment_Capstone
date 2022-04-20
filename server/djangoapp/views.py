@@ -28,7 +28,7 @@ def contact(request):
 def get_dealerships(request):
     if request.method == "GET":
         context = {}
-        url = "https://3df1429b.us-south.apigw.appdomain.cloud/api/getdealership"
+        url = "https://a3795162.eu-gb.apigw.appdomain.cloud/api2/getdealerships"
         dealerships = get_dealers_from_cf(url)
         context["dealership_list"] = dealerships
         return render(request, 'djangoapp/index.html', context)
@@ -37,11 +37,11 @@ def get_dealerships(request):
 def get_dealer_details(request, id):
     if request.method == "GET":
         context = {}
-        dealer_url = "https://3df1429b.us-south.apigw.appdomain.cloud/api/getdealership"
+        dealer_url = "https://a3795162.eu-gb.apigw.appdomain.cloud/api2/getdealerships"
         dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
         context["dealer"] = dealer
     
-        review_url = "https://3df1429b.us-south.apigw.appdomain.cloud/api/getreview"
+        review_url = "https://a3795162.eu-gb.apigw.appdomain.cloud/api2/getreviews"
         reviews = get_dealer_reviews_from_cf(review_url, id=id)
         print(reviews)
         context["reviews"] = reviews
@@ -51,7 +51,7 @@ def get_dealer_details(request, id):
 
 def add_review(request, id):
     context = {}
-    dealer_url = "https://3df1429b.us-south.apigw.appdomain.cloud/api/getdealership"
+    dealer_url = "https://a3795162.eu-gb.apigw.appdomain.cloud/api2/getdealerships"
     dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
     context["dealer"] = dealer
     if request.method == 'GET':
@@ -86,7 +86,7 @@ def add_review(request, id):
             new_payload = {}
             new_payload["review"] = payload
             print(new_payload)
-            review_post_url = "https://3df1429b.us-south.apigw.appdomain.cloud/api/postreview"
+            review_post_url = "https://a3795162.eu-gb.apigw.appdomain.cloud/api2/postreviews"
             post_request(review_post_url, new_payload, id=id)
         return redirect("djangoapp:dealer_details", id=id)
 

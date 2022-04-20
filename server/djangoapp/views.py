@@ -34,29 +34,29 @@ def get_dealerships(request):
         return render(request, 'djangoapp/index.html', context)
 
 
-def get_dealer_details(request, id):
+def get_dealer_details(request, dealer_id):
     if request.method == "GET":
         context = {}
         dealer_url = "https://a3795162.eu-gb.apigw.appdomain.cloud/api2/getdealerships"
-        dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
+        dealer = get_dealer_by_id_from_cf(dealer_url, dealer_id)
         context["dealer"] = dealer
     
         review_url = "https://a3795162.eu-gb.apigw.appdomain.cloud/api2/getreviews"
-        reviews = get_dealer_reviews_from_cf(review_url, id=id)
+        reviews = get_dealer_reviews_from_cf(review_url, dealer_id)
         print(reviews)
         context["reviews"] = reviews
         
         return render(request, 'djangoapp/dealer_details.html', context)
 
 
-def add_review(request, id):
+def add_review(request,dealer_id):
     context = {}
     dealer_url = "https://a3795162.eu-gb.apigw.appdomain.cloud/api2/getdealerships"
-    dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
+    dealer = get_dealer_by_id_from_cf(dealer_url, dealer_id)
     context["dealer"] = dealer
     if request.method == 'GET':
         # Get cars for the dealer
-        cars = CarModel.objects.filter(id=id)
+        cars = CarModel.objects.filter(dealer_id)
         print(cars)
         context["cars"] = cars
         
@@ -70,7 +70,7 @@ def add_review(request, id):
             car = CarModel.objects.get(pk=car_id)
             payload["time"] = datetime.utcnow().isoformat()
             payload["name"] = username
-            payload["dealership"] = id
+            payload["dealership"] = dealer_id
             payload["id"] = id
             print(payload["id"])
             payload["review"] = request.POST["content"]
@@ -87,8 +87,8 @@ def add_review(request, id):
             new_payload["review"] = payload
             print(new_payload)
             review_post_url = "https://a3795162.eu-gb.apigw.appdomain.cloud/api2/postreviews"
-            post_request(review_post_url, new_payload, id=id)
-        return redirect("djangoapp:dealer_details", id=id)
+            post_request(review_post_url, new_payload, dealerId=dealer_id)
+        return redirect("djangoapp:dealer_details",dealer_id=dealer_id)
 
 
 def registration_request(request):

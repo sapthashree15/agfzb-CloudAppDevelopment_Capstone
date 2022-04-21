@@ -32,7 +32,7 @@
     </header>
     <!--Header + Nav-->
     <main role="main" class="d-flex justify-content-center pt-3 ">
-        <form class="border border-dark p-4 w-auto h-auto text-center bg-light" action="{% url 'djangoapp:add_review' dealer.id %}"  method="post">
+        <form class="border border-dark p-4 w-auto h-auto text-center bg-light" action="{% url 'djangoapp:add_review' dealer_id %}"  method="post">
             {% csrf_token %}
             
             <h1 class="text-center">Review for {{dealer_name}}</h1><br>

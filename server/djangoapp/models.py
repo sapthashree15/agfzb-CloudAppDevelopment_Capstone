@@ -1,8 +1,8 @@
 from django.db import models
-from django.core import serializers
+# from django.core import serializers
 from django.utils.timezone import now
-import uuid
-import json
+# import uuid
+# import json
 
 # Create your models here.
 
@@ -37,6 +37,7 @@ class CarModel(models.Model):
     SUV = 'SUV'
     WAGON = 'Wagon'
     MINIVAN = 'Minivan'
+
     CAR_TYPES = [
         (SEDAN, 'Sedan'),
         (SUV, 'SUV'),
@@ -59,7 +60,7 @@ class CarModel(models.Model):
 
 class CarDealer:
 
-    def __init__( self, full_name, address, city,id, lat, long, st, zip):
+    def __init__( self,address, city,full_name , id, lat, long, st, zip):
 
         
 

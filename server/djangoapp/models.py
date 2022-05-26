@@ -1,8 +1,8 @@
 from django.db import models
-# from django.core import serializers
+from django.core import serializers
 from django.utils.timezone import now
-# import uuid
-# import json
+import uuid
+import json
 
 # Create your models here.
 
@@ -14,7 +14,7 @@ from django.utils.timezone import now
 
 
 class CarMake(models.Model):
-    name = models.CharField(null=True, max_length=100, default='Make')
+    name = models.CharField(null=False, max_length=100, default='Make')
     description = models.CharField(max_length=500)
 
     def __str__(self):
@@ -31,13 +31,12 @@ class CarMake(models.Model):
 
 class CarModel(models.Model):
     id = models.IntegerField(default=1,primary_key=True)
-    name = models.CharField(null=True, max_length=100, default='Car')
+    name = models.CharField(null=False, max_length=100, default='Car')
    
     SEDAN = 'Sedan'
     SUV = 'SUV'
     WAGON = 'Wagon'
     MINIVAN = 'Minivan'
-
     CAR_TYPES = [
         (SEDAN, 'Sedan'),
         (SUV, 'SUV'),
@@ -46,7 +45,7 @@ class CarModel(models.Model):
     ]
 
     type = models.CharField(
-        null=True,
+        null=False,
         max_length=50,
         choices=CAR_TYPES,
         default=SEDAN
@@ -60,17 +59,12 @@ class CarModel(models.Model):
 
 class CarDealer:
 
-    def __init__( self,address, city,full_name , id, lat, long, st, zip):
-
-        
-
+    def __init__(self, address, city, id, lat, long, st, zip, full_name):
         # Dealer address
         self.address = address
         # Dealer city
         self.city = city
        
-        self.full_name = full_name
-        
         # Dealer id
         self.id = id
         # Location lat
@@ -82,6 +76,9 @@ class CarDealer:
         self.st = st
         # Dealer zip
         self.zip = zip
+
+        # Full name
+        self.full_name = full_name
 
     def __str__(self):
         return "Dealer name: " + self.full_name

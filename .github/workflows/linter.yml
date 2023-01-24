@@ -1,5 +1,6 @@
 name: 'Lint Code'
 
+
 on:
   push:
     branches: [master, main]
